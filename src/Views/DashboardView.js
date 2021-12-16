@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, StyleSheet, Pressable} from 'react-native';
-import {HeaderScreen, SafeView} from '../components';
-import {colors, fonts} from '../themes';
+import {HeaderScreen, SafeView, CreateButton} from '../components';
+import {colors, fonts, metrics, shadows} from '../themes';
 import {screenName} from '../utils/constans';
 
 const DashboardPage = ({navigation}) => {
@@ -9,9 +9,12 @@ const DashboardPage = ({navigation}) => {
     <SafeView>
       <HeaderScreen title="All Tasks" />
       <View style={styles.screen}>
-        <Pressable onPress={() => navigation.navigate(screenName.create)}>
-          <Text style={styles.title}>Dashboard Page</Text>
-        </Pressable>
+        <Text style={styles.title}>Dashboard Page</Text>
+        <View style={styles.createBtnWrapper}>
+          <CreateButton
+            onPress={() => navigation.navigate(screenName.create)}
+          />
+        </View>
       </View>
     </SafeView>
   );
@@ -23,11 +26,20 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: colors.gray,
+    position: 'relative',
   },
   title: {
     fontSize: 14,
     color: colors.black,
-    fontFamily: fonts.bold
+    fontFamily: fonts.bold,
+  },
+  createBtnWrapper: {
+    position: 'absolute',
+    bottom: 20,
+    left: 0,
+    width: metrics.screenWidth,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 

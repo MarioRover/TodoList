@@ -1,10 +1,10 @@
 import React from 'react';
 import {View, Text, StyleSheet, Pressable} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {colors, shadows, fonts} from '../themes';
-import {ChevronLeft} from '../themes/icons';
+import {colors, shadows, fonts, metrics} from '../themes';
+import { FaIcon } from '../themes';
 
-const HeaderScreen = ({title, hasBack = false, onBack}) => {
+const HeaderScreen = ({title, hasBack = false, onBack, headerRight}) => {
   const navigation = useNavigation();
 
   return (
@@ -12,19 +12,21 @@ const HeaderScreen = ({title, hasBack = false, onBack}) => {
       <View>
         {hasBack ? (
           <Pressable onPress={() => (onBack ? onBack : navigation.goBack())}>
-            <ChevronLeft />
+            <FaIcon name="chevron-left" />
           </Pressable>
         ) : null}
       </View>
       <Text style={styles.headerTitle}>{title}</Text>
-      <View></View>
+      <View>
+        {headerRight}
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   headerWrap: {
-    width: '100%',
+    width: metrics.screenWidth,
     paddingHorizontal: 16,
     paddingVertical: 20,
     backgroundColor: colors.gray,
@@ -34,7 +36,7 @@ const styles = StyleSheet.create({
     ...shadows.shadow_4,
   },
   headerTitle: {
-    fontSize: 16,
+    fontSize: 18,
     fontFamily: fonts.bold,
     color: colors.grayDark,
   },
