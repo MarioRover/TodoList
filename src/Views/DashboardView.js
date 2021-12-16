@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, StyleSheet, Pressable} from 'react-native';
 import {HeaderScreen, SafeView} from '../components';
-import {colors} from '../themes';
+import {colors, fonts} from '../themes';
 import {screenName} from '../utils/constans';
 
 const DashboardPage = ({navigation}) => {
@@ -22,11 +22,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: colors.white,
+    backgroundColor: colors.gray,
   },
   title: {
-    fontSize: 12,
+    fontSize: 14,
     color: colors.black,
+    fontFamily: fonts.bold
   },
 });
 

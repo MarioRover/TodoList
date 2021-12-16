@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, StyleSheet, Pressable} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {colors, shadows} from '../themes';
+import {colors, shadows, fonts} from '../themes';
 import {ChevronLeft} from '../themes/icons';
 
 const HeaderScreen = ({title, hasBack = false, onBack}) => {
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingHorizontal: 16,
     paddingVertical: 20,
-    backgroundColor: colors.white,
+    backgroundColor: colors.gray,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     fontSize: 16,
-    // fontFamily: fonts.bold,
+    fontFamily: fonts.bold,
     color: colors.grayDark,
   },
   button: {
