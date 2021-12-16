@@ -1,12 +1,13 @@
 import React from 'react';
 import {View, Text, StyleSheet, Pressable} from 'react-native';
-import SafeView from '../components/SafeView';
+import {HeaderScreen, SafeView} from '../components';
 import {colors} from '../themes';
 import {screenName} from '../utils/constans';
 
 const DashboardPage = ({navigation}) => {
   return (
     <SafeView>
+      <HeaderScreen title="All Tasks" />
       <View style={styles.screen}>
         <Pressable onPress={() => navigation.navigate(screenName.create)}>
           <Text style={styles.title}>Dashboard Page</Text>
