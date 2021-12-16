@@ -1,16 +1,13 @@
 import React from 'react';
-import {View, Text, StyleSheet, Pressable} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 import SafeView from '../components/SafeView';
 import {colors} from '../themes';
-import {screenName} from '../utils/constans';
 
-const DashboardPage = ({navigation}) => {
+const CreateTask = () => {
   return (
     <SafeView>
       <View style={styles.screen}>
-        <Pressable onPress={() => navigation.navigate(screenName.create)}>
-          <Text style={styles.title}>Dashboard Page</Text>
-        </Pressable>
+        <Text style={styles.title}>CreateTask Page</Text>
       </View>
     </SafeView>
   );
@@ -29,4 +26,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default DashboardPage;
+export default CreateTask;

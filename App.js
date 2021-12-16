@@ -1,12 +1,16 @@
 import React from 'react';
 import {Provider} from 'react-redux';
-import {store} from './src/Redux';
-import DashboardPage from './src/Views/DashboardView';
+import {store} from './src/redux';
+
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+import Routes from './src/routes';
 
 const App = () => {
   return (
     <Provider store={store}>
-      <DashboardPage />
+      <SafeAreaProvider>
+        <Routes />
+      </SafeAreaProvider>
     </Provider>
   );
 };
