@@ -1,19 +1,34 @@
 import React from 'react';
-import {Text, StyleSheet} from 'react-native';
+import {Text,View, StyleSheet} from 'react-native';
 import {fonts, colors} from '../themes';
 
-const Label = ({text = '', style}) => {
-  return <Text style={[styles.label, style]}>{text}</Text>;
+const Label = ({text = '', isRequired = false, style}) => {
+  return (
+    <View style={styles.contaienr}>
+      {isRequired ? <Text style={styles.required}>*</Text> : null}
+      <Text style={[styles.label, style]}>{text}</Text>
+    </View>
+  )
 };
 
 const styles = StyleSheet.create({
+  contaienr: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 5,
+  },
   label: {
     fontSize: 14,
     textAlign: 'left',
     fontFamily: fonts.bold,
-    marginBottom: 5,
     color: colors.blue,
   },
+  required: {
+    color: colors.red,
+    fontSize: 18,
+    fontFamily: fonts.bold,
+    marginRight: 2
+  }
 });
 
 export default Label;

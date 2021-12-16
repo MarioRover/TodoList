@@ -10,6 +10,7 @@ const Input = ({
   maxLength = 40,
   multiline = false,
   height = 50,
+  isRequired
 }) => {
   const [isFocus, setIsFocus] = useState(false) 
   
@@ -20,7 +21,7 @@ const Input = ({
 
   return (
     <View style={styles.container}>
-      <Label text={label} />
+      <Label text={label} isRequired={isRequired} />
       <TextInput
         value={value}
         onChangeText={onChange}
@@ -32,6 +33,7 @@ const Input = ({
         numberOfLines={5}
         onFocus={() => setIsFocus(true)}
         onBlur={() => setIsFocus(false)}
+        autoCorrect={false}
       />
     </View>
   );

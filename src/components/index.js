@@ -4,5 +4,14 @@ import Input from './Input';
 import Label from './Label';
 import CreateButton from './CreateButton';
 import TextColor from './TextColor';
+import TaskItem from './TaskItem';
 
-export {SafeView, HeaderScreen, Input, Label, CreateButton, TextColor};
+export {
+  SafeView,
+  HeaderScreen,
+  Input,
+  Label,
+  CreateButton,
+  TextColor,
+  TaskItem,
+};

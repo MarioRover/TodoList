@@ -1,15 +1,24 @@
 import React from 'react';
-import {View, Text, StyleSheet, Pressable} from 'react-native';
-import {HeaderScreen, SafeView, CreateButton} from '../components';
+import {View, Text, StyleSheet, FlatList} from 'react-native';
+import {useSelector} from 'react-redux';
+import {HeaderScreen, SafeView, CreateButton, TaskItem} from '../components';
 import {colors, fonts, metrics, shadows} from '../themes';
 import {screenName} from '../utils/constans';
 
 const DashboardPage = ({navigation}) => {
+  const list = useSelector(state => state.taskList.list);
+  
   return (
     <SafeView>
       <HeaderScreen title="All Tasks" />
       <View style={styles.screen}>
-        <Text style={styles.title}>Dashboard Page</Text>
+        <FlatList
+          data={Object.values(list)}
+          keyExtractor={item => item.id}
+          showsVerticalScrollIndicator={false}
+          renderItem={({item}) => <TaskItem item={item} />}
+        />
+
         <View style={styles.createBtnWrapper}>
           <CreateButton
             onPress={() => navigation.navigate(screenName.create)}
@@ -23,15 +32,12 @@ const DashboardPage = ({navigation}) => {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: colors.gray,
     position: 'relative',
-  },
-  title: {
-    fontSize: 14,
-    color: colors.black,
-    fontFamily: fonts.bold,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: 32,
+    paddingHorizontal: 16
   },
   createBtnWrapper: {
     position: 'absolute',

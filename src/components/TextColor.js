@@ -16,7 +16,7 @@ const TextColor = ({onChoose}) => {
             key={item.name}
             onPress={() => {
               setSelectedColor(item.name);
-            //   onChoose(item.color);
+              onChoose(item.color);
             }}>
             {selectedColor === item.name ? (
               <FaIcon name="check" color={colors.white} />

@@ -11,7 +11,7 @@ const HeaderScreen = ({title, hasBack = false, onBack, headerRight}) => {
     <View style={styles.headerWrap}>
       <View>
         {hasBack ? (
-          <Pressable onPress={() => (onBack ? onBack : navigation.goBack())}>
+          <Pressable style={styles.icon} onPress={() => (onBack ? onBack : navigation.goBack())}>
             <FaIcon name="chevron-left" />
           </Pressable>
         ) : null}
@@ -43,6 +43,11 @@ const styles = StyleSheet.create({
   button: {
     marginRight: 16,
   },
+  icon: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 5
+  }
 });
 
 export default HeaderScreen;
