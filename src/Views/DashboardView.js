@@ -20,7 +20,7 @@ import {colors, FaIcon, metrics} from '../themes';
 import {screenName} from '../utils/constans';
 import {SwipeListView} from 'react-native-swipe-list-view';
 import {deleteTaskAction} from '../redux/task/taskActions';
-import { sortOptions } from '../models';
+import { priorityOptions, sortOptions } from '../models';
 
 const DashboardPage = ({navigation}) => {
   const dispatch = useDispatch();
@@ -45,8 +45,6 @@ const DashboardPage = ({navigation}) => {
 
   const compareSort = (a, b) => {
     switch (sortOptions[sortIndex].key) {
-      case 'created_at':
-        return a.id - b.id;
       case 'alphabet':
         let nameA = a.name.toUpperCase();
         let nameB = b.name.toUpperCase();
@@ -57,11 +55,22 @@ const DashboardPage = ({navigation}) => {
           return 1;
         }
         return 0;
-      // case "priority":
-      //   return
+      case "priority":
+        let priorityA = priorityOptions.findIndex(item => item === a.priority)
+        let priorityB = priorityOptions.findIndex(item => item === b.priority)
+
+        if (priorityA > priorityB) {
+          return -1
+        }
+
+        if (priorityA < priorityB) {
+          return 1
+        }
+
+        return 0
 
       default:
-        return a.id - b.id;
+        return b.id - a.id;
     }
   };
 

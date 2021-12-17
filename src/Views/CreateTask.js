@@ -11,6 +11,8 @@ import {useDispatch} from 'react-redux';
 import {HeaderScreen, Input, SafeView, TextColor} from '../components';
 import {colors, FaIcon} from '../themes';
 import {createTaskAction, updateTaskAction} from '../redux/task/taskActions';
+import Priority from '../components/Priority';
+import {priorityOptions} from '../models';
 
 const FORM_INPUT_UPDATE = 'FORM_INPUT_UPDATE';
 
@@ -55,7 +57,7 @@ const CreateTask = ({route}) => {
       name: task ? task.name : '',
       desc: task ? task.desc : '',
       color: task ? task.color : '',
-      priority: task ? task.priority : '',
+      priority: task ? task.priority : priorityOptions[0],
     },
     inputvalidaties: {
       name: true,
@@ -129,7 +131,7 @@ const CreateTask = ({route}) => {
         }
       />
       <Pressable onPress={() => Keyboard.dismiss()} style={styles.screen}>
-        <ScrollView>
+        <ScrollView showsVerticalScrollIndicator={false}>
           <Input
             label="Task name:"
             value={formState.inputValues.name}
@@ -148,6 +150,10 @@ const CreateTask = ({route}) => {
             onChoose={changeInput.bind(this, 'color')}
             selectedColor={formState.inputValues.color}
           />
+          <Priority
+            selected={formState.inputValues.priority}
+            onSelect={changeInput.bind(this, 'priority')}
+          />
         </ScrollView>
       </Pressable>
     </SafeView>
@@ -158,7 +164,7 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     backgroundColor: colors.gray,
-    padding: 16,
+    paddingHorizontal: 16,
   },
   title: {
     fontSize: 12,
