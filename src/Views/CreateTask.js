@@ -4,8 +4,10 @@ import {
   Keyboard,
   Pressable,
   ScrollView,
+  Vibration,
 } from 'react-native';
 import {useDispatch} from 'react-redux';
+import Toast from 'react-native-toast-message'
 import {HeaderScreen, Input, SafeView, TextColor} from '../components';
 import {colors, FaIcon} from '../themes';
 import {createTaskAction, updateTaskAction} from '../redux/task/taskActions';
@@ -106,6 +108,10 @@ const CreateTask = ({route}) => {
             goBack: true,
           }),
         );
+        Toast.show({
+          type: 'success',
+          text1: 'Task updated successfully',
+        })
       } else {
         // Create
         dispatch(
@@ -113,8 +119,14 @@ const CreateTask = ({route}) => {
             data: formState.inputValues,
           }),
         );
+        Toast.show({
+          type: 'success',
+          text1: 'Task created successfully',
+        })
       }
     }
+    Vibration.vibrate(200, false)
+    
   };
 
   return (

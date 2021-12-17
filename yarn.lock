@@ -5704,6 +5704,11 @@ react-native-swipe-list-view@^3.2.9:
   resolved "https://registry.yarnpkg.com/react-native-swipe-list-view/-/react-native-swipe-list-view-3.2.9.tgz#d725c7cdf481dd5df12a00dbfe0120013b5f2e59"
   integrity sha512-SjAEuHc/D6ovp+RjDUhfNmw6NYOntdT7+GFhfMGfP/BSLMuMWynpzJy9GKQeyB8sI78T6Lzip21TVbongOg1Mw==
 
+react-native-toast-message@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/react-native-toast-message/-/react-native-toast-message-2.1.0.tgz#973568a4ef2f2563515c45fcda166e590bb39ee9"
+  integrity sha512-i6qMiTRiKS5yLAqvDcCZ1GvjZ1BjBpjiwYHDxEmB+URs1WSBsrbfRmCle6xBa8OqcMbCTHHZLQwRrwZ+Td9VIw==
+
 react-native@0.66.4:
   version "0.66.4"
   resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.66.4.tgz#bf89a5fb18bd23046d889fb4de4ea2822a4d7805"

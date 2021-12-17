@@ -12,8 +12,8 @@ const CreateButton = ({onPress}) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: 80,
-    height: 80,
+    width: 60,
+    height: 60,
     borderRadius: 50,
     justifyContent: 'center',
     alignItems: 'center',

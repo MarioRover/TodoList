@@ -12,6 +12,7 @@ import PureModal from './PureModal';
 import FilterModal from './FilterModal';
 import CheckBox from './CheckBox';
 import DeleteModal from './DeleteModal';
+import CustomToast from './CustomToast';
 
 export {
   SafeView,
@@ -27,5 +28,6 @@ export {
   PureModal,
   FilterModal,
   CheckBox,
-  DeleteModal
+  DeleteModal,
+  CustomToast
 };

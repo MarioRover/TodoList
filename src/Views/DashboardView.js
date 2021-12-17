@@ -9,6 +9,7 @@ import {
   Linking
 } from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
+import Toast from 'react-native-toast-message'
 import {
   HeaderScreen,
   SafeView,
@@ -54,6 +55,10 @@ const DashboardPage = ({navigation}) => {
     setShowDeleteAlert({
       show: false,
       id: null
+    })
+    Toast.show({
+      type: 'success',
+      text1: 'Task deleted successfully'
     })
   }
 

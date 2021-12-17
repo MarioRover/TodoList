@@ -10,6 +10,8 @@ import {
   faSortAmountDown,
   faFilter,
   faChevronDown,
+  faCheckCircle,
+  faTimesCircle,
 } from '@fortawesome/free-solid-svg-icons';
 import {faGithub} from '@fortawesome/free-brands-svg-icons';
 import colors from './colors';
@@ -47,11 +49,19 @@ const FaIcon = ({name, size = 16, color = colors.black, style}) => {
     case 'github':
       iconName = faGithub;
       break;
+    case 'check-circle':
+      iconName = faCheckCircle;
+      break;
+    case 'times-circle':
+      iconName = faTimesCircle;
+      break;
     default:
       break;
   }
 
-  return <FontAwesomeIcon icon={iconName} size={size} color={color} style={style} />;
+  return (
+    <FontAwesomeIcon icon={iconName} size={size} color={color} style={style} />
+  );
 };
 
 export default FaIcon;
