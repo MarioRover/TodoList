@@ -2,14 +2,14 @@ import React from 'react';
 import {View, Text, StyleSheet, Pressable} from 'react-native';
 import {colors, FaIcon, fonts, metrics} from '../themes';
 
-const FilterAndSort = ({sort, onSortPress}) => {
+const FilterAndSort = ({sort, onSortPress, onFilterPress}) => {
   return (
     <View style={styles.row}>
       <Pressable style={styles.item} onPress={onSortPress}>
         <FaIcon size={16} name="sort" />
         <Text style={styles.label}>{sort}</Text>
       </Pressable>
-      <Pressable style={styles.item}>
+      <Pressable style={styles.item} onPress={onFilterPress}>
         <FaIcon size={16} name="filter" />
         <Text style={styles.label}>Filter</Text>
       </Pressable>

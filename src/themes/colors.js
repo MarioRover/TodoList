@@ -9,6 +9,7 @@ const colors = {
     gray: "#ECECEE",
     grayDark: "#4D4E50",
     grayLight: "#D9DADD",
+    grayBackground: 'rgba(49,52,62,0.7)'
 }
 
 export default colors

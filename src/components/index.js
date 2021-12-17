@@ -8,6 +8,9 @@ import TaskItem from './TaskItem';
 import ColorBox from './ColorBox';
 import SearchBar from './SearchBar';
 import FilterAndSort from './FilterAndSort';
+import PureModal from './PureModal';
+import FilterModal from './FilterModal';
+import CheckBox from './CheckBox';
 
 export {
   SafeView,
@@ -19,5 +22,8 @@ export {
   TaskItem,
   ColorBox,
   SearchBar,
-  FilterAndSort
+  FilterAndSort,
+  PureModal,
+  FilterModal,
+  CheckBox
 };

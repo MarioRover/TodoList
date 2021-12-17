@@ -15,12 +15,13 @@ import {
   TaskItem,
   SearchBar,
   FilterAndSort,
+  FilterModal,
 } from '../components';
 import {colors, FaIcon, metrics} from '../themes';
 import {screenName} from '../utils/constans';
 import {SwipeListView} from 'react-native-swipe-list-view';
 import {deleteTaskAction} from '../redux/task/taskActions';
-import { priorityOptions, sortOptions } from '../models';
+import {priorityOptions, sortOptions} from '../models';
 
 const DashboardPage = ({navigation}) => {
   const dispatch = useDispatch();
@@ -29,7 +30,11 @@ const DashboardPage = ({navigation}) => {
   const [searchText, setSearchText] = useState('');
   const [sortIndex, setSortType] = useState(0);
 
-  // const [showFilter, SetShowFilter] = useState(false)
+  const [showFilter, SetShowFilter] = useState(false);
+  const [filters, setFilters] = useState({
+    status: false,
+    priorites: [],
+  });
 
   const onDeleteTask = id => {
     dispatch(deleteTaskAction({id}));
@@ -55,33 +60,66 @@ const DashboardPage = ({navigation}) => {
           return 1;
         }
         return 0;
-      case "priority":
-        let priorityA = priorityOptions.findIndex(item => item === a.priority)
-        let priorityB = priorityOptions.findIndex(item => item === b.priority)
+      case 'priority':
+        let priorityA = priorityOptions.findIndex(item => item === a.priority);
+        let priorityB = priorityOptions.findIndex(item => item === b.priority);
 
         if (priorityA > priorityB) {
-          return -1
+          return -1;
         }
 
         if (priorityA < priorityB) {
-          return 1
+          return 1;
         }
 
-        return 0
+        return 0;
 
       default:
         return b.id - a.id;
     }
   };
 
-  const memoizedTask = useMemo(() => {
+  const handleFilters = (input, value) => {
+    if (input === 'status') {
+      setFilters(prevState => ({
+        ...filters,
+        status: !prevState.status,
+      }));
+    } else {
+      let _priority = [...filters.priorites];
+      if (_priority.includes(value)) {
+        _priority = _priority.filter(el => el !== value);
+      } else {
+        _priority.push(value);
+      }
+      setFilters({
+        ...filters,
+        priorites: _priority,
+      });
+    }
+  };
+
+  const calcualtedTaskList = useMemo(() => {
     let data = Object.values(list);
     data.sort((a, b) => compareSort(a, b));
+    if (filters.status) {
+      data = data.filter(el => el.status);
+    }
+    if (filters.priorites.length) {
+      let _data = [];
+
+      filters.priorites.forEach(prio => {
+        _data = _data.concat(data.filter(task => task.priority === prio));
+      });
+
+      data = _data;
+    }
+
     data = data.filter(
       item => item.name.toLowerCase().indexOf(searchText.toLowerCase()) > -1,
     );
     return data;
-  }, [list, sortIndex, searchText]);
+  }, [list, sortIndex, searchText, filters]);
 
   return (
     <SafeView>
@@ -91,9 +129,10 @@ const DashboardPage = ({navigation}) => {
         <FilterAndSort
           sort={sortOptions[sortIndex].title}
           onSortPress={handleSortPress}
+          onFilterPress={() => SetShowFilter(true)}
         />
         <SwipeListView
-          data={memoizedTask}
+          data={calcualtedTaskList}
           keyExtractor={item => item.id}
           showsVerticalScrollIndicator={false}
           renderItem={({item}) => renderItem(item, navigation)}
@@ -102,6 +141,13 @@ const DashboardPage = ({navigation}) => {
           previewRowKey={'0'}
           previewOpenDelay={3000}
         />
+        <FilterModal
+          visible={showFilter}
+          onClose={() => SetShowFilter(false)}
+          filters={filters}
+          handleFilters={handleFilters}
+        />
+
         <View style={styles.createBtnWrapper}>
           <CreateButton
             onPress={() => navigation.navigate(screenName.create)}
