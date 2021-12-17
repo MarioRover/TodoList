@@ -7,6 +7,7 @@ import TextColor from './TextColor';
 import TaskItem from './TaskItem';
 import ColorBox from './ColorBox';
 import SearchBar from './SearchBar';
+import FilterAndSort from './FilterAndSort';
 
 export {
   SafeView,
@@ -17,5 +18,6 @@ export {
   TextColor,
   TaskItem,
   ColorBox,
-  SearchBar
+  SearchBar,
+  FilterAndSort
 };

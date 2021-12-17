@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React, {useMemo, useState} from 'react';
 import {
   View,
   Text,
   StyleSheet,
   TouchableOpacity,
   Pressable,
+  Keyboard,
 } from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import {
@@ -13,31 +14,77 @@ import {
   CreateButton,
   TaskItem,
   SearchBar,
+  FilterAndSort,
 } from '../components';
-import {colors, FaIcon, fonts, metrics, shadows} from '../themes';
+import {colors, FaIcon, metrics} from '../themes';
 import {screenName} from '../utils/constans';
 import {SwipeListView} from 'react-native-swipe-list-view';
 import {deleteTaskAction} from '../redux/task/taskActions';
+import { sortOptions } from '../models';
 
 const DashboardPage = ({navigation}) => {
-  const list = useSelector(state => state.taskList.list);
   const dispatch = useDispatch();
+  const list = useSelector(state => state.taskList.list);
+
   const [searchText, setSearchText] = useState('');
+  const [sortIndex, setSortType] = useState(0);
+
+  // const [showFilter, SetShowFilter] = useState(false)
 
   const onDeleteTask = id => {
     dispatch(deleteTaskAction({id}));
   };
 
+  const handleSortPress = () => {
+    let index = 0;
+    if (sortIndex < sortOptions.length - 1) {
+      index = sortIndex + 1;
+    }
+    setSortType(index);
+  };
+
+  const compareSort = (a, b) => {
+    switch (sortOptions[sortIndex].key) {
+      case 'created_at':
+        return a.id - b.id;
+      case 'alphabet':
+        let nameA = a.name.toUpperCase();
+        let nameB = b.name.toUpperCase();
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+        return 0;
+      // case "priority":
+      //   return
+
+      default:
+        return a.id - b.id;
+    }
+  };
+
+  const memoizedTask = useMemo(() => {
+    let data = Object.values(list);
+    data.sort((a, b) => compareSort(a, b));
+    data = data.filter(
+      item => item.name.toLowerCase().indexOf(searchText.toLowerCase()) > -1,
+    );
+    return data;
+  }, [list, sortIndex, searchText]);
+
   return (
     <SafeView>
       <HeaderScreen title="All Tasks" />
-      <View style={styles.screen}>
+      <Pressable onPress={() => Keyboard.dismiss()} style={styles.screen}>
         <SearchBar value={searchText} onChangeText={setSearchText} />
+        <FilterAndSort
+          sort={sortOptions[sortIndex].title}
+          onSortPress={handleSortPress}
+        />
         <SwipeListView
-          data={Object.values(list).filter(
-            item =>
-              item.name.toLowerCase().indexOf(searchText.toLowerCase()) > -1,
-          )}
+          data={memoizedTask}
           keyExtractor={item => item.id}
           showsVerticalScrollIndicator={false}
           renderItem={({item}) => renderItem(item, navigation)}
@@ -51,7 +98,7 @@ const DashboardPage = ({navigation}) => {
             onPress={() => navigation.navigate(screenName.create)}
           />
         </View>
-      </View>
+      </Pressable>
     </SafeView>
   );
 };
@@ -92,8 +139,7 @@ const styles = StyleSheet.create({
     position: 'relative',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: 32,
-    paddingHorizontal: 16,
+    padding: 16,
   },
   createBtnWrapper: {
     position: 'absolute',

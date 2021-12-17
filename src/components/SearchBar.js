@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {View, Pressable, StyleSheet, TextInput} from 'react-native';
-import {colors, FaIcon, metrics} from '../themes';
+import {colors, FaIcon, metrics, fonts} from '../themes';
 
 const SearchBar = ({value, onChangeText}) => {
   const [isFocus, setIsFocus] = useState(false);
@@ -36,11 +36,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     width: metrics.screenWidth - 32,
     height: 46,
-    marginTop: 12,
     borderWidth: 1,
     borderRadius: 8,
     overflow: 'hidden',
-    marginBottom: 20,
+    marginBottom: 12,
     backgroundColor: colors.white,
   },
   closeBtn: {

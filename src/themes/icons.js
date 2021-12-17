@@ -6,7 +6,9 @@ import {
   faCheck,
   faTrash,
   faEdit,
-  faTimes
+  faTimes,
+  faSortAmountDown,
+  faFilter
 } from '@fortawesome/free-solid-svg-icons';
 import colors from './colors';
 
@@ -28,9 +30,15 @@ const FaIcon = ({name, size = 16, color = colors.black}) => {
     case 'edit':
       iconName = faEdit;
       break;
-      case 'times':
-        iconName = faTimes;
-        break; 
+    case 'times':
+      iconName = faTimes;
+      break;
+    case 'sort':
+      iconName = faSortAmountDown;
+      break;
+    case 'filter':
+        iconName = faFilter;
+        break;  
     default:
       break;
   }
