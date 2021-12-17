@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -7,7 +7,13 @@ import {
   Pressable,
 } from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
-import {HeaderScreen, SafeView, CreateButton, TaskItem} from '../components';
+import {
+  HeaderScreen,
+  SafeView,
+  CreateButton,
+  TaskItem,
+  SearchBar,
+} from '../components';
 import {colors, FaIcon, fonts, metrics, shadows} from '../themes';
 import {screenName} from '../utils/constans';
 import {SwipeListView} from 'react-native-swipe-list-view';
@@ -16,21 +22,22 @@ import {deleteTaskAction} from '../redux/task/taskActions';
 const DashboardPage = ({navigation}) => {
   const list = useSelector(state => state.taskList.list);
   const dispatch = useDispatch();
+  const [searchText, setSearchText] = useState('');
 
   const onDeleteTask = id => {
-    dispatch(
-      deleteTaskAction({
-        id,
-      }),
-    );
+    dispatch(deleteTaskAction({id}));
   };
 
   return (
     <SafeView>
       <HeaderScreen title="All Tasks" />
       <View style={styles.screen}>
+        <SearchBar value={searchText} onChangeText={setSearchText} />
         <SwipeListView
-          data={Object.values(list)}
+          data={Object.values(list).filter(
+            item =>
+              item.name.toLowerCase().indexOf(searchText.toLowerCase()) > -1,
+          )}
           keyExtractor={item => item.id}
           showsVerticalScrollIndicator={false}
           renderItem={({item}) => renderItem(item, navigation)}

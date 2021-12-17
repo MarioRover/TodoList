@@ -6,6 +6,7 @@ import CreateButton from './CreateButton';
 import TextColor from './TextColor';
 import TaskItem from './TaskItem';
 import ColorBox from './ColorBox';
+import SearchBar from './SearchBar';
 
 export {
   SafeView,
@@ -15,5 +16,6 @@ export {
   CreateButton,
   TextColor,
   TaskItem,
-  ColorBox
+  ColorBox,
+  SearchBar
 };

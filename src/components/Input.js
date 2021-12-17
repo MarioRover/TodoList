@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {View, Text, StyleSheet, TextInput} from 'react-native';
 import Label from './Label';
 import {colors, fonts, metrics} from '../themes';
@@ -10,22 +10,24 @@ const Input = ({
   maxLength = 40,
   multiline = false,
   height = 50,
-  isRequired
+  isRequired,
+  placeholder,
+  returnKeyType = 'next'
 }) => {
-  const [isFocus, setIsFocus] = useState(false) 
-  
+  const [isFocus, setIsFocus] = useState(false);
+
   const textInputStyle = {
     height,
-    borderColor: isFocus ? colors.blue : colors.grayLight 
+    borderColor: isFocus ? colors.blue : colors.grayLight,
   };
 
   return (
     <View style={styles.container}>
-      <Label text={label} isRequired={isRequired} />
+      {label ? <Label text={label} isRequired={isRequired} /> : null}
       <TextInput
         value={value}
         onChangeText={onChange}
-        returnKeyType={'next'}
+        returnKeyType={returnKeyType}
         style={[styles.textInput, textInputStyle]}
         underlineColorAndroid={colors.white}
         maxLength={maxLength}
@@ -34,6 +36,8 @@ const Input = ({
         onFocus={() => setIsFocus(true)}
         onBlur={() => setIsFocus(false)}
         autoCorrect={false}
+        placeholder={placeholder}
+        placeholderTextColor={colors.grayLight}
       />
     </View>
   );
@@ -42,9 +46,8 @@ const Input = ({
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'column',
-    marginBottom: 30
+    marginBottom: 30,
   },
-
   textInput: {
     width: metrics.screenWidth - 32,
     backgroundColor: colors.white,
@@ -54,7 +57,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     fontFamily: fonts.normal,
     color: colors.grayDark,
-    textAlignVertical: 'top'
+    textAlignVertical: 'top',
   },
 });
 
