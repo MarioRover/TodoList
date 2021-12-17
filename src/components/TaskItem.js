@@ -48,7 +48,8 @@ const styles = StyleSheet.create({
   contaienr: {
     width: metrics.screenWidth - 32,
     backgroundColor: 'blue',
-    padding: 16,
+    paddingHorizontal: 16,
+    height: 60,
     borderRadius: 15,
     marginBottom: 10,
     flexDirection: 'row',

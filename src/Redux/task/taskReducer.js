@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createTaskAction, updateTaskAction } from "./taskActions";
+import { createTaskAction, deleteTaskAction, updateTaskAction } from "./taskActions";
 
 const initialState = {
     list: {}
@@ -8,17 +8,16 @@ const initialState = {
 const taskSlice = createSlice({
     name: 'taskList',
     initialState,
-    reducers: {
-        deleteTask(state, { payload }) {
-
-        },
-    },
+    reducers: {},
     extraReducers: (builder) => {
         builder.addCase(createTaskAction.fulfilled, (state, {payload}) => {
             state.list[payload.id] = payload
         }),
         builder.addCase(updateTaskAction.fulfilled, (state, {payload}) => {
             state.list[payload.id] = payload
+        })
+        builder.addCase(deleteTaskAction.fulfilled, (state, {payload}) => {
+            state.list = payload
         })
     }
 })

@@ -4,6 +4,7 @@ import {
   faChevronLeft,
   faPlus,
   faCheck,
+  faTrash,
 } from '@fortawesome/free-solid-svg-icons';
 import colors from './colors';
 
@@ -18,6 +19,9 @@ const FaIcon = ({name, size = 16, color = colors.black}) => {
       break;
     case 'check':
       iconName = faCheck;
+      break;
+    case 'trash':
+      iconName = faTrash;
       break;
     default:
       break;

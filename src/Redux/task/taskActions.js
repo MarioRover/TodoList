@@ -21,12 +21,23 @@ export const updateTaskAction = createAsyncThunk(
   'taskList/updateTask',
   (data, {getState}) => {
     let task = getState().taskList.list[data.id];
-    if(task) {
-        task = {
-            ...data,
-            updated_at: new Date()
-        }
+    if (task) {
+      task = {
+        ...data,
+        updated_at: new Date(),
+      };
     }
-    return task
+    return task;
+  },
+);
+
+export const deleteTaskAction = createAsyncThunk(
+  'taskList/deleteTask',
+  ({id}, {getState}) => {
+    let newList = {...getState().taskList.list};
+    if (newList[id]) {
+      delete newList[id];
+    }
+    return newList;
   },
 );

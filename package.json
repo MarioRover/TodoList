@@ -22,6 +22,7 @@
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^3.10.1",
     "react-native-svg": "^12.1.1",
+    "react-native-swipe-list-view": "^3.2.9",
     "react-redux": "^7.2.6",
     "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0"
