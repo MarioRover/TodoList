@@ -19,13 +19,16 @@ export const createTaskAction = createAsyncThunk(
 
 export const updateTaskAction = createAsyncThunk(
   'taskList/updateTask',
-  (data, {getState}) => {
+  ({data, goBack = false}, {getState}) => {
     let task = getState().taskList.list[data.id];
     if (task) {
       task = {
         ...data,
         updated_at: new Date(),
       };
+    }
+    if(goBack) {
+      navigation.goBack()
     }
     return task;
   },

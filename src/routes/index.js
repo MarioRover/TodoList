@@ -3,7 +3,7 @@ import {StatusBar} from 'react-native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
 import { navigationRef } from './NavigationService';
-import { DashboardPage, CreateTask } from '../views';
+import { DashboardPage, CreateTask, DetailsTask } from '../views';
 import {screenName} from '../utils/constans';
 import {colors} from '../themes';
 
@@ -19,6 +19,7 @@ const Routes = () => {
           header: () => null,
         }}>
         <Stack.Screen name={screenName.dashboard} component={DashboardPage} />
+        <Stack.Screen name={screenName.details} component={DetailsTask} />
         <Stack.Screen name={screenName.create} component={CreateTask} />
       </Stack.Navigator>
     </NavigationContainer>

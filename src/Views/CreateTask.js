@@ -1,4 +1,4 @@
-import React, {useReducer} from 'react';
+import React, {useReducer, useMemo} from 'react';
 import {
   View,
   Text,
@@ -10,7 +10,7 @@ import {
 import {useDispatch} from 'react-redux';
 import {HeaderScreen, Input, SafeView, TextColor} from '../components';
 import {colors, FaIcon} from '../themes';
-import {createTaskAction} from '../redux/task/taskActions';
+import {createTaskAction, updateTaskAction} from '../redux/task/taskActions';
 
 const FORM_INPUT_UPDATE = 'FORM_INPUT_UPDATE';
 
@@ -41,15 +41,21 @@ const formReducer = (state, action) => {
   }
 };
 
-const CreateTask = () => {
+const CreateTask = ({route}) => {
+  const task = useMemo(() => {
+    if (route.params && route.params.task) {
+      return route.params.task;
+    }
+  }, [route]);
+
   const dispatch = useDispatch();
 
   const [formState, dispatchFormState] = useReducer(formReducer, {
     inputValues: {
-      name: '',
-      desc: '',
-      color: '',
-      priority: '',
+      name: task ? task.name : '',
+      desc: task ? task.desc : '',
+      color: task ? task.color : '',
+      priority: task ? task.priority : '',
     },
     inputvalidaties: {
       name: true,
@@ -61,7 +67,6 @@ const CreateTask = () => {
   });
 
   const changeInput = (input, text) => {
-    // console.log({input, text});
     let isValid = true;
     switch (input) {
       case 'name':
@@ -87,18 +92,32 @@ const CreateTask = () => {
   const submitForm = () => {
     if (formState.formIsValid) {
       // Submit Form
-      dispatch(
-        createTaskAction({
-          data: formState.inputValues,
-        }),
-      );
+      if (task) {
+        // Update
+        dispatch(
+          updateTaskAction({
+            data: {
+              ...task,
+              ...formState.inputValues,
+            },
+            goBack: true,
+          }),
+        );
+      } else {
+        // Create
+        dispatch(
+          createTaskAction({
+            data: formState.inputValues,
+          }),
+        );
+      }
     }
   };
 
   return (
     <SafeView>
       <HeaderScreen
-        title="Create New"
+        title={task ? 'Edit' : 'Create'}
         hasBack
         headerRight={
           <Pressable style={styles.icon} onPress={submitForm}>
@@ -125,7 +144,10 @@ const CreateTask = () => {
             value={formState.inputValues.desc}
             onChange={changeInput.bind(this, 'desc')}
           />
-          <TextColor onChoose={changeInput.bind(this, 'color')} />
+          <TextColor
+            onChoose={changeInput.bind(this, 'color')}
+            selectedColor={formState.inputValues.color}
+          />
         </ScrollView>
       </Pressable>
     </SafeView>

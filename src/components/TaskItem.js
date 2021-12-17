@@ -23,8 +23,10 @@ const TaskItem = ({item}) => {
         onPress={() => {
           dispatch(
             updateTaskAction({
-              ...item,
-              status: !item.status,
+              data: {
+                ...item,
+                status: !item.status,
+              }
             }),
           );
         }}

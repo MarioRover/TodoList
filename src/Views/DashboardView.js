@@ -1,5 +1,11 @@
 import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Pressable,
+} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import {HeaderScreen, SafeView, CreateButton, TaskItem} from '../components';
 import {colors, FaIcon, fonts, metrics, shadows} from '../themes';
@@ -27,7 +33,7 @@ const DashboardPage = ({navigation}) => {
           data={Object.values(list)}
           keyExtractor={item => item.id}
           showsVerticalScrollIndicator={false}
-          renderItem={renderItem}
+          renderItem={({item}) => renderItem(item, navigation)}
           renderHiddenItem={({item}) => renderHiddenItem(item, onDeleteTask)}
           leftOpenValue={80}
           previewRowKey={'0'}
@@ -43,8 +49,17 @@ const DashboardPage = ({navigation}) => {
   );
 };
 
-const renderItem = ({item}) => {
-  return <TaskItem item={item} />;
+const renderItem = (item, navigation) => {
+  return (
+    <Pressable
+      onPress={() =>
+        navigation.navigate(screenName.details, {
+          id: item.id,
+        })
+      }>
+      <TaskItem item={item} />
+    </Pressable>
+  );
 };
 
 const renderHiddenItem = (item, onDeleteTask) => {

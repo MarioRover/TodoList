@@ -1,27 +1,24 @@
-import React, {useState} from 'react';
-import {View, Text, StyleSheet, Pressable} from 'react-native';
+import React from 'react';
+import {View, StyleSheet} from 'react-native';
 import Label from './Label';
-import {colors, FaIcon, metrics} from '../themes';
+import {colors, metrics} from '../themes';
 import {colorOptions} from '../models';
+import ColorBox from './ColorBox';
 
-const TextColor = ({onChoose}) => {
-  const [selectedColor, setSelectedColor] = useState(null);
+const TextColor = ({onChoose, selectedColor}) => {
   return (
     <View style={styles.contaienr}>
       <Label text="Task color" />
       <View style={styles.colorsContaienr}>
         {colorOptions.map(item => (
-          <Pressable
-            style={[styles.colorBox, {backgroundColor: item.color}]}
+          <ColorBox
             key={item.name}
+            color={item.color}
+            selected={selectedColor === item.color}
             onPress={() => {
-              setSelectedColor(item.name);
               onChoose(item.color);
-            }}>
-            {selectedColor === item.name ? (
-              <FaIcon name="check" color={colors.white} />
-            ) : null}
-          </Pressable>
+            }}
+          />
         ))}
       </View>
     </View>
