@@ -1,7 +1,5 @@
 import React, {useReducer, useMemo} from 'react';
 import {
-  View,
-  Text,
   StyleSheet,
   Keyboard,
   Pressable,
@@ -60,7 +58,7 @@ const CreateTask = ({route}) => {
       priority: task ? task.priority : priorityOptions[0],
     },
     inputvalidaties: {
-      name: true,
+      name: task && task.name ? true : false,
       desc: true,
       color: true,
       priority: true,
@@ -77,6 +75,9 @@ const CreateTask = ({route}) => {
         }
         break;
       case 'desc':
+        if(text.length > 140) {
+          isValid = false
+        }
         break;
 
       default:
@@ -135,14 +136,17 @@ const CreateTask = ({route}) => {
           <Input
             label="Task name:"
             value={formState.inputValues.name}
+            isValid={formState.inputvalidaties.name}
+            errorMessage="Name can not be empty, it's required!"
             onChange={changeInput.bind(this, 'name')}
             isRequired
           />
           <Input
             label="Task description:"
-            maxLength={140}
             multiline
             value={formState.inputValues.desc}
+            isValid={formState.inputvalidaties.desc}
+            errorMessage="Description should not be more than 140 character!"
             onChange={changeInput.bind(this, 'desc')}
           />
           <TextColor
@@ -163,7 +167,7 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     backgroundColor: colors.gray,
-    padding: 16,
+    paddingHorizontal: 16,
   },
   title: {
     fontSize: 12,

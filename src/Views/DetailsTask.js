@@ -36,10 +36,10 @@ const DetailsTask = ({navigation, route}) => {
             <Text style={styles.value}>{task.name}</Text>
           </View>
         ) : null}
-        {task.desc ? (
+        {task.priority ? (
           <View style={styles.col}>
-            <Text style={styles.label}>Description</Text>
-            <Text style={styles.value}>{task.desc}</Text>
+            <Text style={styles.label}>Priority</Text>
+            <Text style={styles.value}>{task.priority}</Text>
           </View>
         ) : null}
         {task.color ? (
@@ -50,10 +50,10 @@ const DetailsTask = ({navigation, route}) => {
             </Text>
           </View>
         ) : null}
-        {task.priority ? (
+        {task.desc ? (
           <View style={styles.col}>
-            <Text style={styles.label}>Priority</Text>
-            <Text style={styles.value}>{task.priority}</Text>
+            <Text style={styles.label}>Description</Text>
+            <Text style={styles.value}>{task.desc}</Text>
           </View>
         ) : null}
       </View>
@@ -80,9 +80,10 @@ const styles = StyleSheet.create({
     color: colors.black,
     fontFamily: fonts.boldExtra,
     textAlign: 'left',
+    marginBottom: 5,
   },
   value: {
-    fontSize: 16,
+    fontSize: 18,
     color: colors.grayDark,
     fontFamily: fonts.normal,
     textAlign: 'left',

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, StyleSheet, TextInput} from 'react-native';
+import {View, StyleSheet, TextInput, Text} from 'react-native';
 import Label from './Label';
 import {colors, fonts, metrics} from '../themes';
 
@@ -11,7 +11,9 @@ const Input = ({
   multiline = false,
   isRequired,
   placeholder,
-  returnKeyType = 'next'
+  returnKeyType = 'next',
+  isValid,
+  errorMessage
 }) => {
   const [isFocus, setIsFocus] = useState(false);
 
@@ -38,6 +40,7 @@ const Input = ({
         placeholder={placeholder}
         placeholderTextColor={colors.grayLight}
       />
+     {!isValid ? <Text style={styles.error}>{errorMessage}</Text> : null}
     </View>
   );
 };
@@ -57,6 +60,11 @@ const styles = StyleSheet.create({
     fontFamily: fonts.normal,
     color: colors.grayDark
   },
+  error: {
+    color: colors.red,
+    fontFamily: fonts.normal,
+    fontSize: 12
+  }
 });
 
 export default Input;
