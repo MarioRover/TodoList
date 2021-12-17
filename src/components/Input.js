@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet, TextInput} from 'react-native';
+import {View, StyleSheet, TextInput} from 'react-native';
 import Label from './Label';
 import {colors, fonts, metrics} from '../themes';
 
@@ -9,7 +9,6 @@ const Input = ({
   onChange,
   maxLength = 40,
   multiline = false,
-  height = 50,
   isRequired,
   placeholder,
   returnKeyType = 'next'
@@ -17,7 +16,7 @@ const Input = ({
   const [isFocus, setIsFocus] = useState(false);
 
   const textInputStyle = {
-    height,
+    textAlignVertical: multiline ? 'top' : 'center',
     borderColor: isFocus ? colors.blue : colors.grayLight,
   };
 
@@ -32,7 +31,7 @@ const Input = ({
         underlineColorAndroid={colors.white}
         maxLength={maxLength}
         multiline={multiline}
-        numberOfLines={5}
+        numberOfLines={multiline ? 5 : 1}
         onFocus={() => setIsFocus(true)}
         onBlur={() => setIsFocus(false)}
         autoCorrect={false}
@@ -54,10 +53,9 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     fontSize: 16,
     borderWidth: 1,
-    paddingHorizontal: 10,
+    padding: 10,
     fontFamily: fonts.normal,
-    color: colors.grayDark,
-    textAlignVertical: 'top',
+    color: colors.grayDark
   },
 });
 

@@ -14,7 +14,7 @@ const Priority = ({selected, onSelect}) => {
         <Pressable
           onPress={() => setIsOpen(prevState => !prevState)}
           style={styles.row}>
-          <Text style={styles.label}>{selected}</Text>
+          <Text style={[styles.label, styles.labelSelected]}>{selected}</Text>
           <FaIcon name="chevron-down" />
         </Pressable>
         {isOpen &&
@@ -63,8 +63,11 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 14,
     color: colors.black,
-    fontFamily: fonts.bold,
+    fontFamily: fonts.normal,
   },
+  labelSelected: {
+    fontFamily: fonts.bold,
+  }
 });
 
 export default Priority;

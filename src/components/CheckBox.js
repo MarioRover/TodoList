@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 16,
     color: colors.grayDark,
-    fontFamily: fonts.bold,
+    fontFamily: fonts.normal,
     marginLeft: 10,
   },
   checkbox: {

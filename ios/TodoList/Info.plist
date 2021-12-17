@@ -58,6 +58,10 @@
 		<string>IRANYekanMobileFaNum-Bold.ttf</string>
 		<string>IRANYekanMobileFaNum-Light.ttf</string>
 		<string>IRANYekanMobileFaNum.ttf</string>
+		<string>Glory-Bold.ttf</string>
+		<string>Glory-ExtraBold.ttf</string>
+		<string>Glory-Light.ttf</string>
+		<string>Glory-Medium.ttf</string>
 	</array>
 </dict>
 </plist>

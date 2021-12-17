@@ -14,7 +14,7 @@ const SearchBar = ({value, onChangeText}) => {
       <TextInput
         value={value}
         onChangeText={onChangeText}
-        placeholder={'Search'}
+        placeholder={'Search at list...'}
         placeholderTextColor={colors.grayLight}
         style={styles.searchInput}
         returnKeyType={'search'}
@@ -53,8 +53,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: fonts.normal,
     color: colors.grayDark,
-    paddingLeft: 16,
-    textAlignVertical: 'top',
+    paddingLeft: 16
   },
 });
 

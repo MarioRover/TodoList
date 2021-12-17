@@ -80,6 +80,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: colors.grayDark,
     fontFamily: fonts.boldExtra,
+    marginBottom: 5
   },
   margin: {
     marginBottom: 5,

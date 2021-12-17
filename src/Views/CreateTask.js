@@ -142,7 +142,6 @@ const CreateTask = ({route}) => {
             label="Task description:"
             maxLength={140}
             multiline
-            height={200}
             value={formState.inputValues.desc}
             onChange={changeInput.bind(this, 'desc')}
           />
@@ -164,7 +163,7 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     backgroundColor: colors.gray,
-    paddingHorizontal: 16,
+    padding: 16,
   },
   title: {
     fontSize: 12,
