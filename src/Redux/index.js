@@ -4,11 +4,17 @@ import {persistReducer, persistStore} from 'redux-persist'
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import taskReducer from './task/taskReducer';
+import config from '../utils/config';
 
 const persistConfig = {
   key: "root",
   storage: AsyncStorage
 };
+
+let middleware = []
+if(config.debug) {
+  middleware.push(logger)
+}
 
 export const store = configureStore({
   reducer: {
@@ -17,7 +23,7 @@ export const store = configureStore({
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: false,
-    }).concat(logger),
+    }).concat(middleware),
 });
 
 export const presistor = persistStore(store)
