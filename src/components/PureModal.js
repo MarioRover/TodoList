@@ -1,21 +1,19 @@
 import React from 'react';
 import {View, StyleSheet, Modal} from 'react-native';
-import { colors, metrics } from '../themes';
+import {colors, metrics} from '../themes';
 
 const modalWidth = metrics.screenWidth - 37 * 2;
 
 const PureModal = ({children, visible, type = 'fade'}) => {
-  return (
-    visible && (
-      <View style={styles.centeredView}>
-        <Modal animationType={type} transparent={true} visible={true}>
-          <View style={styles.centeredView}>
-            <View style={styles.modalView}>{children}</View>
-          </View>
-        </Modal>
-      </View>
-    )
-  );
+  return visible ? (
+    <View style={styles.centeredView}>
+      <Modal animationType={type} transparent={true} visible={true}>
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>{children}</View>
+        </View>
+      </Modal>
+    </View>
+  ) : null;
 };
 
 const styles = StyleSheet.create({
@@ -40,5 +38,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PureModal
-
+export default PureModal;

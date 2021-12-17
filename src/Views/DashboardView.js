@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Pressable,
   Keyboard,
+  Linking
 } from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import {
@@ -16,8 +17,9 @@ import {
   SearchBar,
   FilterAndSort,
   FilterModal,
+  DeleteModal,
 } from '../components';
-import {colors, FaIcon, metrics} from '../themes';
+import {colors, FaIcon, fonts, metrics} from '../themes';
 import {screenName} from '../utils/constans';
 import {SwipeListView} from 'react-native-swipe-list-view';
 import {deleteTaskAction} from '../redux/task/taskActions';
@@ -29,16 +31,31 @@ const DashboardPage = ({navigation}) => {
 
   const [searchText, setSearchText] = useState('');
   const [sortIndex, setSortType] = useState(0);
-
-  const [showFilter, SetShowFilter] = useState(false);
+  const [showFilterModal, setShowFilterModal] = useState(false);
+  const [showDeleteAlert, setShowDeleteAlert] = useState({
+    show: false,
+    id: null
+  })
   const [filters, setFilters] = useState({
     status: false,
     priorites: [],
   });
 
-  const onDeleteTask = id => {
-    dispatch(deleteTaskAction({id}));
+  const onDeleteTask = (id) => {
+    setShowDeleteAlert({
+      show: true,
+      id
+    })
+    
   };
+  
+  const handleDeleteTask = () => {
+    dispatch(deleteTaskAction({id: showDeleteAlert.id}));
+    setShowDeleteAlert({
+      show: false,
+      id: null
+    })
+  }
 
   const handleSortPress = () => {
     let index = 0;
@@ -99,6 +116,13 @@ const DashboardPage = ({navigation}) => {
     }
   };
 
+  const openUrlLink = async () => {
+    const url = "https://github.com/MarioRover"
+    Linking.canOpenURL(url).then(() => {
+      Linking.openURL(url);
+    });
+  }
+
   const calcualtedTaskList = useMemo(() => {
     let data = Object.values(list);
     data.sort((a, b) => compareSort(a, b));
@@ -125,11 +149,18 @@ const DashboardPage = ({navigation}) => {
     <SafeView>
       <HeaderScreen title="All Tasks" />
       <Pressable onPress={() => Keyboard.dismiss()} style={styles.screen}>
+        <Pressable style={styles.header} onPress={openUrlLink}>
+          <Text style={styles.title}>Created By Hossein Akbari, </Text>
+          <View style={styles.row}>
+            <Text style={styles.title}>Follow Me</Text>
+            <FaIcon name="github" color={colors.grayDark} style={styles.icon} />
+          </View>
+        </Pressable>
         <SearchBar value={searchText} onChangeText={setSearchText} />
         <FilterAndSort
           sort={sortOptions[sortIndex].title}
           onSortPress={handleSortPress}
-          onFilterPress={() => SetShowFilter(true)}
+          onFilterPress={() => setShowFilterModal(true)}
         />
         <SwipeListView
           data={calcualtedTaskList}
@@ -142,10 +173,16 @@ const DashboardPage = ({navigation}) => {
           previewOpenDelay={3000}
         />
         <FilterModal
-          visible={showFilter}
-          onClose={() => SetShowFilter(false)}
+          visible={showFilterModal}
+          onClose={() => setShowFilterModal(false)}
           filters={filters}
           handleFilters={handleFilters}
+        />
+
+        <DeleteModal
+          visible={showDeleteAlert.show}
+          onClose={() => setShowDeleteAlert(false)}
+          onDelete={handleDeleteTask}
         />
 
         <View style={styles.createBtnWrapper}>
@@ -218,6 +255,23 @@ const styles = StyleSheet.create({
   backTextWhite: {
     color: colors.white,
   },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 16,
+  },
+  title: {
+    fontFamily: fonts.bold,
+    color: colors.grayDark,
+  },
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  icon: {
+    marginLeft: 5
+  }
 });
 
 export default DashboardPage;

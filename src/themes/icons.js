@@ -11,9 +11,10 @@ import {
   faFilter,
   faChevronDown,
 } from '@fortawesome/free-solid-svg-icons';
+import {faGithub} from '@fortawesome/free-brands-svg-icons';
 import colors from './colors';
 
-const FaIcon = ({name, size = 16, color = colors.black}) => {
+const FaIcon = ({name, size = 16, color = colors.black, style}) => {
   let iconName;
   switch (name) {
     case 'chevron-left':
@@ -43,11 +44,14 @@ const FaIcon = ({name, size = 16, color = colors.black}) => {
     case 'chevron-down':
       iconName = faChevronDown;
       break;
+    case 'github':
+      iconName = faGithub;
+      break;
     default:
       break;
   }
 
-  return <FontAwesomeIcon icon={iconName} size={size} color={color} />;
+  return <FontAwesomeIcon icon={iconName} size={size} color={color} style={style} />;
 };
 
 export default FaIcon;

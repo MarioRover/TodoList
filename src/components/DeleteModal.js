@@ -1,11 +1,9 @@
 import React from 'react';
 import {View, Text, StyleSheet, Pressable} from 'react-native';
 import PureModal from './PureModal';
-import CheckBox from './CheckBox';
 import {colors, FaIcon, fonts} from '../themes';
-import {priorityOptions} from '../models';
 
-const FilterModal = ({visible, onClose, filters, handleFilters}) => {
+const DeleteModal = ({visible, onClose, onDelete}) => {
   return (
     <PureModal visible={visible}>
       <View style={styles.container}>
@@ -13,29 +11,20 @@ const FilterModal = ({visible, onClose, filters, handleFilters}) => {
           <Pressable onPress={onClose} style={styles.close}>
             <FaIcon name="times" />
           </Pressable>
-          <Text style={styles.headerTitle}>Filters</Text>
+          <Text style={styles.headerTitle}>Delete Task</Text>
         </View>
 
-        <View style={styles.col}>
-          <Text style={styles.title}>Status</Text>
-          <CheckBox
-            title="Just tasks done"
-            value={filters.status}
-            onPress={() => handleFilters('status', null)}
-          />
+        <Text style={styles.title}>Do you want delete this taks?</Text>
+
+        <View style={styles.row}>
+          <Pressable onPress={onDelete} style={[styles.btn, styles.btnBlue]}>
+            <Text style={styles.btnText}>Yes</Text>
+          </Pressable>
+          <Pressable onPress={onClose} style={[styles.btn, styles.btnRed]}>
+            <Text style={styles.btnText}>No</Text>
+          </Pressable>
         </View>
-        <View style={styles.col}>
-          <Text style={styles.title}>Priority</Text>
-          {priorityOptions.map(item => (
-            <View style={styles.margin} key={item}>
-              <CheckBox
-                title={item}
-                value={filters.priorites.includes(item)}
-                onPress={() => handleFilters('priorites', item)}
-              />
-            </View>
-          ))}
-        </View>
+
       </View>
     </PureModal>
   );
@@ -53,7 +42,7 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 10,
+    marginBottom: 20,
   },
   headerTitle: {
     fontSize: 18,
@@ -64,6 +53,7 @@ const styles = StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'center'
   },
   col: {
     width: '100%',
@@ -73,17 +63,33 @@ const styles = StyleSheet.create({
   close: {
     position: 'absolute',
     top: 5,
-    right: 0
+    right: 0,
   },
   title: {
     fontSize: 16,
     color: colors.grayDark,
     fontFamily: fonts.boldExtra,
-    marginBottom: 5
+    marginBottom: 20
   },
-  margin: {
-    marginBottom: 5,
+  btn: {
+    width: '30%',
+    paddingVertical: 10,
+    backgroundColor: 'red',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 6,
+    marginHorizontal: 10
   },
+  btnText: {
+    fontFamily: fonts.bold,
+    color: colors.white
+  },
+  btnRed: {
+    backgroundColor: colors.red
+  },
+  btnBlue: {
+    backgroundColor: colors.blue
+  }
 });
 
-export default FilterModal;
+export default DeleteModal;

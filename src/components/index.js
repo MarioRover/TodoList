@@ -11,6 +11,7 @@ import FilterAndSort from './FilterAndSort';
 import PureModal from './PureModal';
 import FilterModal from './FilterModal';
 import CheckBox from './CheckBox';
+import DeleteModal from './DeleteModal';
 
 export {
   SafeView,
@@ -25,5 +26,6 @@ export {
   FilterAndSort,
   PureModal,
   FilterModal,
-  CheckBox
+  CheckBox,
+  DeleteModal
 };
