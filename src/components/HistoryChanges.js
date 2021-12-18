@@ -13,12 +13,12 @@ const HistoryChanges = ({history}) => {
       </View>
       {history.changes
         ? history.changes.map(el => (
-            <View style={styles.changeItem}>
+            <View style={styles.changeItem} key={el.key}>
               <Text style={[styles.label, styles.key]}>{el.key} Changed:</Text>
               <Text style={styles.label}>From</Text>
-              <Text style={styles.text}>{el.old}</Text>
+              <Text style={styles.text}>{el.key === 'Status' ? el.old ? 'Done' : 'Undone' : el.old}</Text>
               <Text style={styles.label}>To</Text>
-              <Text style={styles.text}>{el.new}</Text>
+              <Text style={styles.text}>{el.key === 'Status' ? el.new ? 'Done' : 'Undone' : el.new}</Text>
             </View>
           ))
         : null}

@@ -74,7 +74,7 @@ const DetailsTask = ({navigation, route}) => {
             <View style={styles.col}>
               <Text style={styles.label}>Change History</Text>
               {task.history.map(el => (
-                <HistoryChanges history={el} />
+                <HistoryChanges history={el} key={el.date} />
               ))}
             </View>
           ) : null}
