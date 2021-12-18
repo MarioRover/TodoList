@@ -7,7 +7,6 @@ const Input = ({
   label,
   value,
   onChange,
-  maxLength = 40,
   multiline = false,
   isRequired,
   placeholder,
@@ -31,7 +30,6 @@ const Input = ({
         returnKeyType={returnKeyType}
         style={[styles.textInput, textInputStyle]}
         underlineColorAndroid={colors.white}
-        maxLength={maxLength}
         multiline={multiline}
         numberOfLines={multiline ? 5 : 1}
         onFocus={() => setIsFocus(true)}

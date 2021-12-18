@@ -37,6 +37,7 @@ const Priority = ({selected, onSelect}) => {
         </Pressable>
         {priorityOptions.map(item => (
           <Pressable
+            key={item}
             onPress={() => {
               onSelect(item);
               handleOpenPriority()

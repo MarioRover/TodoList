@@ -124,8 +124,8 @@ const CreateTask = ({route}) => {
           text1: 'Task created successfully',
         })
       }
+      Vibration.vibrate(200, false)
     }
-    Vibration.vibrate(200, false)
     
   };
 

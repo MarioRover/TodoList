@@ -13,6 +13,7 @@ import FilterModal from './FilterModal';
 import CheckBox from './CheckBox';
 import DeleteModal from './DeleteModal';
 import CustomToast from './CustomToast';
+import HistoryChanges from './HistoryChanges';
 
 export {
   SafeView,
@@ -29,5 +30,6 @@ export {
   FilterModal,
   CheckBox,
   DeleteModal,
-  CustomToast
+  CustomToast,
+  HistoryChanges
 };

@@ -173,6 +173,7 @@ const DashboardPage = ({navigation}) => {
           showsVerticalScrollIndicator={false}
           renderItem={({item}) => renderItem(item, navigation)}
           renderHiddenItem={({item}) => renderHiddenItem(item, onDeleteTask)}
+          ListFooterComponent={renderFooter}
           leftOpenValue={80}
           previewRowKey={'0'}
           previewOpenDelay={3000}
@@ -229,6 +230,12 @@ const renderHiddenItem = (item, onDeleteTask) => {
   );
 };
 
+const renderFooter = () => {
+  return (
+    <View style={styles.emptyView} />
+  )
+}
+
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
@@ -236,7 +243,8 @@ const styles = StyleSheet.create({
     position: 'relative',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 16,
+    paddingTop: 16,
+    paddingHorizontal: 16,
   },
   createBtnWrapper: {
     position: 'absolute',
@@ -276,6 +284,10 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginLeft: 5
+  },
+  emptyView: {
+    width: '100%',
+    height: 100
   }
 });
 
